@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self'">
     
     <title>XSS</title>
 
@@ -80,55 +80,7 @@
         </div>
     </div>
 
-    <script>
-
-        // General URL settings (boring stuff)
-
-        const url = document.location.search;
-        const params = new URLSearchParams(url);
-
-        // XSS vulnerability #1
-
-        userParam = params.get("name");
-        userName = "applicant";
-
-        if (userParam !== null) {
-            userName = userParam;
-        }
-
-        document.getElementById("welcome-text").innerHTML = "<h1>How do you do, " + userName + "?</h1>";
-
-        //  XSS vulnerability #2
-
-        const input = document.getElementById("fav-meal-question");
-        const log = document.getElementById("fav-meal-answer");
-
-        input.addEventListener("input", updateValue);
-
-        function updateValue(e) {
-            log.innerHTML = e.target.value;
-        }
-
-        //  XSS vulnerability #3
-
-        const htmlInput = document.getElementById("html-input");
-        const htmlOutput = document.getElementById("html-output");
-        const showButton = document.getElementById("show-html");
-
-        showButton.addEventListener("click", showHTML);
-
-        function showHTML() {
-            htmlOutput.innerHTML = htmlInput.value;
-        }
-
-        //  XSS vulnerability #4
-
-        const redir = params.get("goto");
-        if (redir !== null && redir !== "null") {
-            document.location = redir;
-        }
-
-    </script>
+    <script> src="script.js"</script>
 
 </body>
 
